@@ -1,3 +1,4 @@
+/*
 //https://leetcode.com/problems/compact-object/editorial/?envType=study-plan-v2&envId=30-days-of-javascript
 const compactObject = function(obj) {
     let res = [];
@@ -21,4 +22,4 @@ const compactObject = function(obj) {
 };
 
 const obj = {"a": null, "b": [false, 1]};
-compactObject(obj);
+compactObject(obj);*/
