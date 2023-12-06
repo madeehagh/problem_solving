@@ -17,6 +17,22 @@ const dfs = (image, sr, sc, newColor, currColor) => {
         }
     //}
 };
+
+const bfs = (image, sr, sc, newColor) => {
+    const currColor = image[sr][sc];
+    const queue = [[sr, sc]];
+
+    while (queue.length) {
+        let [row, col] =queue.shift();
+        if (isValidMove(image, row, col) && image[row][col] === currColor) {
+                image[row][col] = newColor;
+                queue.push([row -1, col]);
+                queue.push([row +1, col]);
+                queue.push([row, col-1]);
+                queue.push([row, col+1]);
+        }
+    }
+}
 /**
  * @param {number[][]} image
  * @param {number} sr
@@ -27,7 +43,8 @@ const dfs = (image, sr, sc, newColor, currColor) => {
 const floodFill = function(image, sr, sc, newColor) {
     const currColor = image[sr][sc];
     if (currColor != newColor)
-        dfs(image, sr , sc, newColor, currColor);
+        bfs(image, sr, sc, color);
+        //dfs(image, sr , sc, newColor, currColor);
     return image;
 };
 
