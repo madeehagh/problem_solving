@@ -1,25 +1,32 @@
-/*
 //https://leetcode.com/problems/compact-object/editorial/?envType=study-plan-v2&envId=30-days-of-javascript
 const compactObject = function(obj) {
-    let res = [];
-    if(!obj)
-        return false;
+    function dfs(obj) {
+        if(!obj)
+            return false;
+        if (typeof obj != "object")
+            return obj;
 
-    const removeFalseData = (obj) => {
-
-        obj.forEach(item) {
-            if(Array.isArray(item)) {
-                removeFalseData(item);
-            } else if (item !== null && item !==0 && item !== false){
-                res.push(item);
+        if (Array.isArray(obj)) {
+            const resArr = [];
+            for (const currObj of obj) {
+                const validObj = dfs(currObj);
+                if (validObj)
+                    resArr.push(validObj);
             }
+            return resArr;
         }
-        console.log(res)
-        return res;
+
+        const newObj = {};
+        for (const currKey in obj) {
+            const subRes = dfs(obj[currKey]);
+            if (subRes)
+                newObj[currKey] = subRes;
+        }
+        return newObj;
     }
 
-    removeFalseData(obj);
+   return  dfs(obj);
 };
 
 const obj = {"a": null, "b": [false, 1]};
-compactObject(obj);*/
+console.log(compactObject(obj));
